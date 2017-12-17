@@ -1,4 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import RecipeBoxApp from "./components/RecipeBoxApp";
 
-ReactDOM.render(<p>Recipe box</p>, document.getElementById("app"));
+ReactDOM.render(<RecipeBoxApp />, document.getElementById("app"));

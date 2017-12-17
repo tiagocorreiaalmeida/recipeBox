@@ -1,1 +1,19 @@
+.container {
+    max-width: 970px;
+}
 
+/*INGREDIENTS LIST*/
+.ingredient__list {
+    padding: 0;
+}
+
+.ingredient__item {
+    list-style: none;
+}
+
+.ingredient__item::before {
+    content: "\f3d3";
+    display: inline-block;
+    font-family: "Ionicons";
+    margin-right: 10px;
+}
