@@ -8,11 +8,9 @@ export default class RecipesList extends React.Component {
                 {this.props.recipes.map(recipe => (
                     <Recipe
                         key={recipe.id}
-                        id={recipe.id}
-                        title={recipe.title}
-                        date={recipe.date}
-                        ingredients={recipe.ingredients}
+                        recipe={recipe}
                         removeRecipe={this.props.removeRecipe}
+                        editRecipe = {this.props.editRecipe}
                     />
                 ))}
             </ul>

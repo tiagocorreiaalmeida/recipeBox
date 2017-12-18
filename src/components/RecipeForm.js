@@ -2,29 +2,54 @@ import React from "react";
 import moment from "moment";
 import uuid from "uuid";
 
+
 export default class RecipeFrom extends React.Component {
     constructor(props) {
         super(props);
         this.onSubmit = this.onSubmit.bind(this);
+        this.onInputChange = this.onInputChange.bind(this);
+        this.onTextAreaChange = this.onTextAreaChange.bind(this);
+        this.closeModal = this.closeModal.bind(this);
         this.state = {
+            title: this.props.recipe.id ? this.props.recipe.title : "",
+            ingredients: this.props.recipe.id ? this.props.recipe.ingredients.join(",") : "",
             error: undefined
         };
     }
+
+    onInputChange(e) {
+        let title = e.target.value;
+        this.setState(() => ({
+            title
+        }))
+
+    }
+
+    onTextAreaChange(e) {
+        let ingredients = e.target.value;
+        this.setState(() => ({
+            ingredients
+        }))
+    }
+
+    closeModal(){
+        this.props.toggle();
+    }
+
     onSubmit(e) {
         e.preventDefault();
-        let title = e.target.title.value.trim();
-        let ingredients = e.target.ingredients.value.trim();
-        if (!title || !ingredients) {
-            console.log("something missing");
+        let title = this.state.title.trim();
+        let ingredients = this.state.ingredients.trim();
+        if (!this.state.title || !this.state.ingredients) {
             this.setState(() => ({ error: "Fill all the inputs" }));
         } else {
             this.setState(() => ({ error: undefined }));
-            ingredients = ingredients.split(",");
+            ingredients = ingredients.split(",").map((ingredient) => ingredient.trim());
             this.props.updateFunction({
-                id: uuid(),
+                id: this.props.recipe.id ? this.props.recipe.id : uuid(),
                 title,
                 ingredients,
-                date: moment().valueOf()
+                date: this.props.recipe.id ? this.props.recipe.date : moment().valueOf()
             });
             e.target.title.value = "";
             e.target.ingredients.value = "";
@@ -33,10 +58,11 @@ export default class RecipeFrom extends React.Component {
     render() {
         return (
             <form onSubmit={this.onSubmit}>
-                <input type="text" name="title" autoFocus />
-                <textarea col="3" name="ingredients" />
-                <button>Submit</button>
+                <input type="text" name="title" className="form-modal__input mb-3" autoFocus value={this.state.title} onChange={this.onInputChange} />
+                <textarea col="3" name="ingredients" className="form-modal__textarea mb-3" value={this.state.ingredients} onChange={this.onTextAreaChange} />
                 {this.state.error && <p>{this.state.error}</p>}
+                    <button type="submit" className="btn btn-custom--block btn-custom btn-custom--success"><i className="ion-checkmark-round"></i> Save</button>
+                    <button type="button" className="btn btn-custom--block btn-custom btn-custom--danger" onClick={this.closeModal}><i className="ion-close-round"></i> Cancel</button>
             </form>
         );
     }

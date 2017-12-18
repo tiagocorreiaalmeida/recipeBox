@@ -1,19 +1,201 @@
+html{
+    font-size:62.5%;
+}
+body{
+    font-family: 'Roboto', sans-serif;
+    color: #1e1e1e; 
+    background-color:#f6f6f6;
+    font-size: 1.6rem;
+}
+
+a,
+a:hover{
+    text-decoration: none;
+}
+
+button,
+button:focus
+{
+    outline: none;
+    cursor: pointer;
+    box-shadow: none !important;
+}
+
 .container {
     max-width: 970px;
 }
 
+.title{
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 3.5rem;
+}
+
+.title__icon{
+    color: #f79824;
+    padding-right: 10px;
+}
+
+/*MODAL*/
+.ReactModalPortal>div {
+    opacity: 0;
+  }
+.ReactModalPortal .ReactModal__Overlay {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    transition: opacity 200ms ease-in-out;
+  }
+
+  .ReactModalPortal .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  .ReactModalPortal .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+
+.form-modal{
+    min-width: 45rem;
+    margin:0 10px;
+    text-align: center;
+    border: 3px solid #1EA894;
+    border-radius: 3px;
+    padding: 25px;
+    background-color: #fff;
+}
+
+.form-modal__title{
+    text-transform: uppercase;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.form-modal__input{
+    display:block;
+    width:100%;
+    padding:5px;
+    border: 3px solid #BFC0C0;
+    border-radius: 3px;
+}
+
+.form-modal__textarea{
+    display: block;
+    width: 100%;
+    min-height: 12rem;
+    padding:5px; 
+    border: 2px solid #BFC0C0;
+    border-radius: 3px;
+}
+
+/*RECIPE*/
+.list-group-item{
+    border: 2px solid rgba(0,0,0,.125);
+}
+.recipe__title{
+    font-size: 2.6rem;
+    color:#034C59; 
+    font-size: 3rem;
+    transition: all .2s;
+}
+
+.recipe__subtitle{
+    font-size: 2.8rem;
+}
+
+.recipe__title:hover{
+    transform:translateY(-2px);
+}
+
 /*INGREDIENTS LIST*/
+.ingredient__title{
+
+}
+
 .ingredient__list {
     padding: 0;
 }
 
 .ingredient__item {
     list-style: none;
+    font-size: 1.8rem;
+    color:#4d4d4d;
 }
 
 .ingredient__item::before {
     content: "\f3d3";
     display: inline-block;
     font-family: "Ionicons";
-    margin-right: 10px;
+    margin-right: 5px;  
 }
+
+
+/*BUTTONS*/
+.btn-custom{
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    margin: 5px;
+    padding:5px;
+    font-weight: bold;
+}
+.btn-custom--success{
+    border:2px solid #88A34F;
+    background-color: #88A34F;
+    color: #fff;
+}
+
+.btn-custom--success:hover{
+    background-color: #fff;
+    color: #88A34F;
+}
+
+.btn-custom--danger{
+    border:2px solid #D73E3F;
+    background-color: #D73E3F;
+    color: #fff;
+}
+
+.btn-custom--danger:hover{
+    background-color: #fff;
+    color: #D73E3F;
+}
+
+.btn-custom--orange{
+    background-color: #fff;
+    border:2px solid #e97f02;
+    color: #e97f02;
+    font-size: 2rem; 
+}
+
+.btn-custom--orange:hover{
+    color: #fff;
+    background-color: #e97f02;
+}
+
+.btn-custom--block{
+    font-size: 1.6rem;
+    width:100%;
+}
+
+/*QUERIES*/
+@media only screen and (max-width:900px){
+    html{
+        font-size: 56.25%;
+    }
+}
+
+@media only screen and (max-width:600px){
+    html{
+        font-size: 52.5%;
+    }
+    .form-modal {
+        min-width: 35rem;
+    }
+}
+
+@media only screen and (max-width:480px){
+    .btn-custom--orange{
+        width:100%;
+        margin:0;
+    }
+} 
