@@ -99,6 +99,18 @@ button:focus
     transition: all .2s;
 }
 
+.recipe__link{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.recipe__date{
+    font-size:2rem;
+    display: inline-block;
+    color:#737373;
+}
+
 .recipe__subtitle{
     font-size: 2.8rem;
 }

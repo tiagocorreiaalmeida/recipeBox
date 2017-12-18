@@ -23,8 +23,9 @@ export default class Recipe extends React.Component {
                     href={`#${this.props.recipe.id}`}
                     aria-expanded="false"
                     aria-controls="collapseExample"
+                    className="recipe__link"
                 >
-                    <h2 className="recipe__title">{this.props.recipe.title}</h2>
+                    <h2 className="recipe__title">{this.props.recipe.title}</h2> <span className="recipe__date"><i className="ion-calendar"></i> {moment.unix(this.props.recipe.date / 1000).format("DD-MM-YYYY")}</span>
                 </a>
 
                 <div className="collapse col-md-12 mt-3" id={this.props.recipe.id}>
