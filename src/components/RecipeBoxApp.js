@@ -13,38 +13,39 @@ export default class RecipeBoxApp extends React.Component {
         this.editRecipe = this.editRecipe.bind(this);
         this.modalStateToggle = this.modalStateToggle.bind(this);
         this.state = {
-            recipes: [                {
-                id: uuid(),
-                title: "Pizza Margherita",
-                ingredients: [
-                    "300g strong bread flour",
-                    "1 tsp instant yeast (from a sachet or a tub)",
-                    "1 tsp salt",
-                    "1 tbsp olive oil",
-                    "100ml passata",
-                    "1 garlic clove",
-                    "125g ball mozzarella",
-                    "handful cherry tomatoes",
-                    "handful grated or shaved parmesan"
-                ],
-                date: moment().valueOf(),
-
-            }],
+            recipes: [
+                {
+                    id: uuid(),
+                    title: "Pizza Margherita",
+                    ingredients: [
+                        "300g strong bread flour",
+                        "1 tsp instant yeast (from a sachet or a tub)",
+                        "1 tsp salt",
+                        "1 tbsp olive oil",
+                        "100ml passata",
+                        "1 garlic clove",
+                        "125g ball mozzarella",
+                        "handful cherry tomatoes",
+                        "handful grated or shaved parmesan"
+                    ],
+                    date: moment().valueOf()
+                }
+            ],
             modalState: false,
             recipe: ""
         };
     }
 
-    componentDidMount(){
-        if(localStorage.getItem("recipes")){
-            this.setState(()=>({
+    componentDidMount() {
+        if (localStorage.getItem("recipes")) {
+            this.setState(() => ({
                 recipes: JSON.parse(localStorage.getItem("recipes"))
-            }))
+            }));
         }
     }
 
-    componentDidUpdate(){
-        localStorage.setItem("recipes",JSON.stringify(this.state.recipes));
+    componentDidUpdate() {
+        localStorage.setItem("recipes", JSON.stringify(this.state.recipes));
     }
 
     removeRecipe(id) {
@@ -61,30 +62,27 @@ export default class RecipeBoxApp extends React.Component {
             recipes: [...this.state.recipes, recipe],
             modalState: !prevState.modalState
         }));
-
     }
 
     editRecipe(currentRecipe) {
         this.setState((prevState, props) => {
-            let recipes = prevState.recipes.map((recipe) => {
+            let recipes = prevState.recipes.map(recipe => {
                 if (recipe.id === currentRecipe.id) {
                     return {
                         id: recipe.id,
                         title: currentRecipe.title,
                         ingredients: currentRecipe.ingredients,
                         date: recipe.date
-
-                    }
+                    };
                 }
                 return recipe;
-            })
+            });
             return {
                 recipes,
                 modalState: !prevState.modalState,
                 recipe: ""
-            }
-
-        })
+            };
+        });
     }
 
     modalStateToggle(recipe = {}) {
@@ -108,9 +106,20 @@ export default class RecipeBoxApp extends React.Component {
                     onRequestClose={this.modalStateToggle}
                     className="form-modal"
                 >
-                    <h1 className="form-modal__title mb-4 mt-2"><i className={this.state.recipe ? "ion-edit" : "ion-compose"}></i> {this.state.recipe ? "Update Recipe" : "Create new recipe"}</h1>
+                    <h1 className="form-modal__title mb-4 mt-2">
+                        <i
+                            className={
+                                this.state.recipe ? "ion-edit" : "ion-compose"
+                            }
+                        />{" "}
+                        {this.state.recipe
+                            ? "Update Recipe"
+                            : "Create new recipe"}
+                    </h1>
                     <RecipeFrom
-                        updateFunction={this.state.recipe ? this.editRecipe : this.addRecipe}
+                        updateFunction={
+                            this.state.recipe ? this.editRecipe : this.addRecipe
+                        }
                         recipe={this.state.recipe ? this.state.recipe : {}}
                         toggle={this.modalStateToggle}
                     />
@@ -121,7 +130,12 @@ export default class RecipeBoxApp extends React.Component {
                     editRecipe={this.modalStateToggle}
                 />
                 <div className="text-center mt-3">
-                    <button onClick={this.modalStateToggle} className="btn btn-custom btn-custom--orange"><i className="ion-compose"></i> New Recipe</button>
+                    <button
+                        onClick={this.modalStateToggle}
+                        className="btn btn-custom btn-custom--orange"
+                    >
+                        <i className="ion-compose" /> New Recipe
+                    </button>
                 </div>
             </div>
         );
